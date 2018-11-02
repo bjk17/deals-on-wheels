@@ -15,7 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from dow import views
 
 urlpatterns = [
+    path('', views.index, name='index'),
+    path('get/all/manufacturers', views.all_manufacturers_json),
+    path('get/all/cars', views.all_cars_json),
+    path('get/all/advertisements', views.all_advertisements_json),
     path('admin/', admin.site.urls),
 ]
