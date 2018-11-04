@@ -30,7 +30,22 @@ class Car(models.Model):
 class Advertisement(models.Model):
     seller = models.ForeignKey(User, on_delete=models.CASCADE)
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
+    image_url = models.CharField(max_length=200)
     price = models.IntegerField()
+
+    currency_choices = (
+        ('ISK', 'Icelandic kronors'),
+        ('USD', 'US Dollars'),
+        ('EUR', 'Euros'),
+        ('BTC', 'Bitcoin')
+    )
+    currency = models.CharField(
+        max_length=3,
+        choices=currency_choices,
+        default='ISK',
+    )
+
+    description = models.CharField(max_length=1000, blank=True)
 
     def get_list_of_advertisements(self):
         return [str(a) for a in self.Advertisement.all()]
