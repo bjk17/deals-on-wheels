@@ -22,5 +22,6 @@ urlpatterns = [
     path('get/all/manufacturers', views.all_manufacturers_json),
     path('get/all/cars', views.all_cars_json),
     path('get/all/advertisements', views.all_advertisements_json),
+    path('create/an/advertisement', views.create_advertisement),
     path('admin/', admin.site.urls),
 ]
