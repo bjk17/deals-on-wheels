@@ -25,7 +25,7 @@ SECRET_KEY = 'xhdxsdc^m^m=*y9vm^4#rlin0w0&beu&5ir*-dxp(=cwrv1+i%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '54.229.222.0']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '54.229.222.0', 'deals-on-wheels.bjk.is', 'deals-on-wheels-backend.bjk.is']
 
 
 # Application definition
