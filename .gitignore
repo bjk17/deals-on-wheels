@@ -105,3 +105,6 @@ venv.bak/
 
 # IntelliJ IDEA
 .idea/
+
+# Django app migrations files
+dow/migrations/

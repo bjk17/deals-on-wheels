@@ -25,7 +25,7 @@ SECRET_KEY = 'xhdxsdc^m^m=*y9vm^4#rlin0w0&beu&5ir*-dxp(=cwrv1+i%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['54.229.222.0']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '54.229.222.0']
 
 
 # Application definition
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
     'dow',
 ]
 
@@ -71,6 +72,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'dow.wsgi.application'
 
+# CORS allow all
+CORS_ORIGIN_ALLOW_ALL = True
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
