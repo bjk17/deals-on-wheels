@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
     'dow',
 ]
 
@@ -71,6 +72,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'dow.wsgi.application'
 
+# CORS allow all
+CORS_ORIGIN_ALLOW_ALL = True
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
