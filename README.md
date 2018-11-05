@@ -23,3 +23,4 @@ The following endpoints have been set up which may be of help in order to develo
 * <http://localhost:8000/get/all/manufacturers>
 * <http://localhost:8000/get/all/cars>
 * <http://localhost:8000/get/all/advertisements>
+* <http://localhost:8000/create/an/advertisement>

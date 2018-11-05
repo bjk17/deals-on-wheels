@@ -31,9 +31,7 @@ def create_advertisement(request):
         # 405 Method Not Allowed
         return HttpResponse(status=405)
 
-    print(request.POST)
     json = request.POST
-    print(json)
     user, created = User.objects.get_or_create(
         username = json['username'],
         password = 'password',
