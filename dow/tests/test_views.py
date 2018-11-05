@@ -3,6 +3,7 @@ from django.http import HttpRequest, HttpResponse
 from dow.views import create_advertisement
 from django.contrib.auth.models import User
 from dow.models import Manufacturer, Car, Advertisement
+import json
 
 
 class ViewsTests(TestCase):
@@ -26,7 +27,7 @@ class ViewsTests(TestCase):
     def test_GET_instead_of_POST(self):
         request = HttpRequest()
         request.method = 'GET'
-        request.POST = self.new_ad_json
+        request.POST = json.dumps(self.new_ad_json)
         response = create_advertisement(request)
         self.assertEqual(response.status_code, 405)
 
