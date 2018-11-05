@@ -16,9 +16,15 @@ class Manufacturer(models.Model):
 class Car(models.Model):
     manufacturer = models.ForeignKey(Manufacturer, on_delete=models.CASCADE)
     model = models.CharField(max_length=50)
+    registration_number = models.CharField(max_length=10, unique=True)
     color = models.CharField(max_length=10)
     driven = models.IntegerField()
     year = models.IntegerField()
+    weight = models.IntegerField(null=True, blank=True)
+    registered_at = models.DateField(null=True, blank=True)
+    next_check = models.DateField(null=True, blank=True)
+    pollution = models.CharField(max_length=100, null=True, blank=True)
+
 
     def get_list_of_cars(self):
         return [str(c) for c in self.Car.all()]
