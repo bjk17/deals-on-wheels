@@ -2,12 +2,23 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
+# Overwriting 'User' class 'natural_key' function to better fit our format
+def user_natural_key(self):
+    return {'username': self.get_username()}
+
+
+User.natural_key = user_natural_key
+
+
 class Manufacturer(models.Model):
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=1000, blank=True)
 
     def get_list_of_manufacturers(self):
         return [str(m) for m in self.Manufacturer.all()]
+
+    def natural_key(self):
+        return {'name': self.name, 'description': self.description}
 
     def __str__(self):
         return self.name
@@ -25,12 +36,25 @@ class Car(models.Model):
     next_check = models.DateField(null=True, blank=True)
     pollution = models.CharField(max_length=100, null=True, blank=True)
 
-
     def get_list_of_cars(self):
         return [str(c) for c in self.Car.all()]
 
+    def natural_key(self):
+        return {
+            'manufacturer': self.manufacturer.name,
+            'model': self.model,
+            'registration_number': self.registration_number,
+            'color': self.color,
+            'driven': self.driven,
+            'year': self.year,
+            'weight': self.weight,
+            'registered_at': self.registered_at,
+            'next_check': self.next_check,
+            'pollution': self.pollution
+        }
+
     def __str__(self):
-        return "{} {}, {}".format(self.manufacturer, self.model, self.year)
+        return "({}) {} {}, {}".format(self.registration_number, self.manufacturer, self.model, self.year)
 
 
 class Advertisement(models.Model):
