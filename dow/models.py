@@ -32,8 +32,8 @@ class Car(models.Model):
     year = models.IntegerField()
     driven = models.IntegerField(null=True, blank=True)
     weight = models.IntegerField(null=True, blank=True)
-    registered_at = models.DateField(null=True, blank=True)
-    next_check = models.DateField(null=True, blank=True)
+    registered_at = models.CharField(max_length=8, null=True, blank=True)
+    next_check = models.CharField(max_length=8, null=True, blank=True)
     pollution = models.CharField(max_length=100, null=True, blank=True)
 
     def get_list_of_cars(self):
