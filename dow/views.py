@@ -44,9 +44,9 @@ def create_advertisement(request):
             return HttpResponse(status=400)
 
     user, created = User.objects.get_or_create(
-        username=body_json.get('username'),
+        username=str(body_json.get('username')),
         password='password',
-        email='{}@example.org'.format(body_json.get('username'))
+        email="{}@example.org".format(str(body_json.get('username')))
     )
     manufacturer, created = Manufacturer.objects.get_or_create(
         name=body_json.get('manufacturer'),
