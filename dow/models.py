@@ -29,8 +29,8 @@ class Car(models.Model):
     model = models.CharField(max_length=50)
     registration_number = models.CharField(max_length=10, unique=True)
     color = models.CharField(max_length=10)
-    driven = models.IntegerField()
     year = models.IntegerField()
+    driven = models.IntegerField(null=True, blank=True)
     weight = models.IntegerField(null=True, blank=True)
     registered_at = models.DateField(null=True, blank=True)
     next_check = models.DateField(null=True, blank=True)
@@ -45,8 +45,8 @@ class Car(models.Model):
             'model': self.model,
             'registration_number': self.registration_number,
             'color': self.color,
-            'driven': self.driven,
             'year': self.year,
+            'driven': self.driven,
             'weight': self.weight,
             'registered_at': self.registered_at,
             'next_check': self.next_check,

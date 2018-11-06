@@ -13,7 +13,6 @@ class ViewsTests(TestCase):
         'model': "911 Carrera",
         'registration_number': "Cool kid",
         'color': "blue",
-        'driven': 50000,
         'year': 2008,
         'weight': None,
         'registered_at': None,
@@ -27,14 +26,14 @@ class ViewsTests(TestCase):
     def test_GET_instead_of_POST(self):
         request = HttpRequest()
         request.method = 'GET'
-        request.POST.update(self.new_ad_json)
+        request._body = json.dumps(self.new_ad_json)
         response = create_advertisement(request)
         self.assertEqual(response.status_code, 405)
 
     def test_sunny_advertisement_creation(self):
         request = HttpRequest()
         request.method = 'POST'
-        request.POST.update(self.new_ad_json)
+        request._body = json.dumps(self.new_ad_json)
 
         response = create_advertisement(request)
         self.assertEqual(response.status_code, 201)
@@ -47,8 +46,9 @@ class ViewsTests(TestCase):
     def test_rainy_advertisement_creation_with_missing_attributes(self):
         request = HttpRequest()
         request.method = 'POST'
-        request.POST.update(self.new_ad_json)
-        request.POST.pop('username')  # deletes from QueryDict
+        bad_ad_json = self.new_ad_json.copy()
+        del bad_ad_json['username']
+        request._body = json.dumps(bad_ad_json)
 
         response = create_advertisement(request)
         self.assertEqual(response.status_code, 400)
