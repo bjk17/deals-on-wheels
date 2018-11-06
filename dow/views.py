@@ -34,40 +34,42 @@ def create_advertisement(request):
         # 405 Method Not Allowed
         return HttpResponse(status=405)
 
-    required_attributes = ['username', 'manufacturer', 'model', 'registration_number', 'color', 'driven', 'year',
-                           'image_url', 'price']
+    body_json = json.loads(request.body)
+
+    required_attributes = ['username', 'manufacturer', 'model', 'registration_number', 'color', 'year', 'image_url',
+                           'price']
     for attr in required_attributes:
-        if attr not in request.POST:
+        if attr not in body_json:
             # 400 Bad Request
             return HttpResponse(status=400)
 
     user, created = User.objects.get_or_create(
-        username=request.POST.get('username'),
+        username=body_json.get('username'),
         password='password',
-        email='{}@example.org'.format(request.POST.get('username'))
+        email='{}@example.org'.format(body_json.get('username'))
     )
     manufacturer, created = Manufacturer.objects.get_or_create(
-        name=request.POST.get('manufacturer'),
+        name=body_json.get('manufacturer'),
         description=""
     )
     car, created = Car.objects.get_or_create(
         manufacturer=manufacturer,
-        model=request.POST.get('model'),
-        registration_number=request.POST.get('registration_number'),
-        color=request.POST.get('color'),
-        driven=request.POST.get('driven'),
-        year=request.POST.get('year'),
-        weight=request.POST.get('weight', None),
-        registered_at=request.POST.get('registered_at', None),
-        next_check=request.POST.get('next_check', None),
-        pollution=request.POST.get('pollution', None)
+        model=body_json.get('model'),
+        registration_number=body_json.get('registration_number'),
+        color=body_json.get('color'),
+        driven=body_json.get('driven'),
+        year=body_json.get('year'),
+        weight=body_json.get('weight', None),
+        registered_at=body_json.get('registered_at', None),
+        next_check=body_json.get('next_check', None),
+        pollution=body_json.get('pollution', None)
     )
     advertisement, created = Advertisement.objects.get_or_create(
         seller=user,
         car=car,
-        image_url=request.POST.get('image_url'),
-        price=request.POST.get('price'),
-        description=request.POST.get('description', None)
+        image_url=body_json.get('image_url'),
+        price=body_json.get('price'),
+        description=body_json.get('description', None)
     )
 
     # 201 Created

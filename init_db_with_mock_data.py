@@ -30,7 +30,6 @@ ferrari_f50, created = Car.objects.get_or_create(
     model="F50",
     registration_number="AB123",
     color="red",
-    driven=33000,
     year=1995
 )
 ad_ferrari_f50, created = Advertisement.objects.get_or_create(
