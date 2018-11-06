@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.core import serializers
 from django.contrib.auth.models import User
 from dow.models import Manufacturer, Car, Advertisement
+import json
 
 
 def index(request):
@@ -31,35 +32,35 @@ def create_advertisement(request):
         # 405 Method Not Allowed
         return HttpResponse(status=405)
 
-    json = request.POST
+    json_object = json.loads(request.POST)
 
     user, created = User.objects.get_or_create(
-        username = json.get('username', 'SecretUser'),
+        username = json_object.get('username', 'SecretUser'),
         password = 'password',
-        email = '{}@example.org'.format(json.get('username', 'SecretUser'))
+        email = '{}@example.org'.format(json_object.get('username', 'SecretUser'))
     )
     manufacturer, created = Manufacturer.objects.get_or_create(
-        name = json.get('manufacturer', None),
+        name = json_object.get('manufacturer', None),
         description = ""
     )
     car, created = Car.objects.get_or_create(
         manufacturer = manufacturer,
-        model = json.get('model', None),
-        registration_number = json.get('registration_number', None),
-        color = json.get('color', None),
-        driven = json.get('driven', None),
-        year = json.get('year', None),
-        weight = json.get('weight', None),
-        registered_at = json.get('registered_at', None),
-        next_check = json.get('next_check', None),
-        pollution = json.get('pollution', None)
+        model = json_object.get('model', None),
+        registration_number = json_object.get('registration_number', None),
+        color = json_object.get('color', None),
+        driven = json_object.get('driven', None),
+        year = json_object.get('year', None),
+        weight = json_object.get('weight', None),
+        registered_at = json_object.get('registered_at', None),
+        next_check = json_object.get('next_check', None),
+        pollution = json_object.get('pollution', None)
     )
     advertisement, created = Advertisement.objects.get_or_create(
         seller = user,
         car = car,
-        image_url = json.get('image_url', None),
-        price = json.get('price', None),
-        description = json.get('description', None)
+        image_url = json_object.get('image_url', None),
+        price = json_object.get('price', None),
+        description = json_object.get('description', None)
     )
 
     # Return a "created" (201) response code.
