@@ -38,7 +38,7 @@ ad_ferrari_f50, created = Advertisement.objects.get_or_create(
     image_url="https://www.supercars.net/blog/wp-content/uploads/2016/05/ferrari_f50_preserial_red_front_view_100209_1920x1080.jpg",
     price=15,
     currency='BTC',
-    description="Car for winners. Be a winner. Have a Ferrari F50. Be admired. Be an alpha. Be cool. Be chill. Drive safely."
+    description="Car for winners. Be a winner. Have a Ferrari F50. Be admired. Be an alpha. Be cool. Be chill. Drive safely. Don't speed. (Maybe a little.) But stay safe!"
 )
 
 # Toyota Corolla
